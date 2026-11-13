@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inbox &amp; Messages — Campus Connect (CampCon)</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/phase1-polish.css" />
+  <style>
+    .inbox-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      height: calc(100vh - 160px);
+      min-height: 500px;
+    }
+    @media (min-width: 768px) {
+      .inbox-layout {
+        grid-template-columns: 320px 1fr;
+      }
+    }
+    .inbox-sidebar, .chat-pane {
+      background: var(--card-bg, #ffffff);
+      border: 1px solid var(--border-color, #e5e7eb);
+      border-radius: 0.85rem;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .conv-item {
+      padding: 0.85rem 1rem;
+      border-bottom: 1px solid var(--border-color, #e5e7eb);
+      cursor: pointer;
+      transition: background 0.15s ease;
+    }
+    .conv-item:hover, .conv-item.active {
+      background: var(--bg-primary, #f3f4f6);
+    }
+    .message-bubble {
+      max-width: 75%;
+      padding: 0.75rem 1rem;
+      border-radius: 0.75rem;
+      margin-bottom: 0.75rem;
+      font-size: 0.95rem;
+      line-height: 1.4;
+    }
+    .message-incoming {
+      background: var(--bg-primary, #f3f4f6);
+      color: var(--text-primary, #111827);
+      align-self: flex-start;
+      border-bottom-left-radius: 0.1rem;
+    }
+    .message-outgoing {
+      background: var(--accent-primary, #2563eb);
+      color: #ffffff;
+      align-self: flex-end;
+      border-bottom-right-radius: 0.1rem;
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav-container" style="display:flex;align-items:center;justify-content:space-between;padding:1rem 0;">
+      <a href="dashboard.html" class="brand-logo" style="font-weight:800;font-size:1.25rem;text-decoration:none;">
+        CampCon
+      </a>
+      <nav style="display:flex;gap:1rem;align-items:center;flex-wrap:wrap;">
+        <a href="dashboard.html">Feed</a>
+        <a href="inbox.html" class="active">Inbox</a>
+        <a href="profile.html">Profile</a>
+        <a href="settings.html">Settings</a>
+        <a href="about.html">About</a>
+        <a href="admin.html" id="navAdminLink" style="display:none;font-weight:700;">Admin</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container" style="padding: 1.25rem 1rem 2rem;">
+    <div id="inboxBanner" style="display:none;padding:0.85rem 1rem;border-radius:0.5rem;margin-bottom:1rem;"></div>
+
+    <div class="inbox-layout">
+      <!-- Sidebar: Conversations List -->
+      <aside class="inbox-sidebar">
+        <div style="padding: 1rem; border-bottom: 1px solid var(--border-color, #e5e7eb); font-weight: 700;">
+          Conversations
+        </div>
+        <div id="conversationsList" style="overflow-y: auto; flex: 1;">
+          <p style="padding: 1rem; color: var(--text-secondary, #6b7280); font-size: 0.9rem;">Loading conversations...</p>
+        </div>
+      </aside>
+
+      <!-- Main: Active Chat Thread -->
+      <section class="chat-pane">
+        <div id="chatHeader" style="padding: 1rem; border-bottom: 1px solid var(--border-color, #e5e7eb); font-weight: 700;">
+          Select a conversation
+        </div>
+
+        <div id="chatMessages" style="flex: 1; padding: 1rem; overflow-y: auto; display: flex; flex-direction: column;">
+          <div style="margin: auto; text-align: center; color: var(--text-secondary, #6b7280);">
+            <p>Choose someone from your inbox or click "Message" on any item card in the feed.</p>
+          </div>
+        </div>
+
+        <form id="messageForm" style="display: none; padding: 0.85rem; border-top: 1px solid var(--border-color, #e5e7eb); gap: 0.5rem;">
+          <input type="text" id="messageInput" placeholder="Type your secure message..." required style="flex: 1; padding: 0.65rem 0.85rem; border-radius: 0.5rem; border: 1px solid var(--border-color, #d1d5db); background: var(--bg-primary, #f9fafb); color: var(--text-primary, #111827);" />
+          <button type="submit" class="btn btn-primary" style="padding: 0.65rem 1.25rem;">Send</button>
+        </form>
+      </section>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/messaging.js"></script>
+</body>
+</html>
