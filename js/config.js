@@ -3,6 +3,6 @@ window.CAMPUS_CONNECT_CONFIG = Object.freeze({
   supabaseUrl: 'YOUR_SUPABASE_PROJECT_URL',
   supabaseAnonKey: 'YOUR_SUPABASE_ANON_KEY',
   appName: 'Campus Connect',
-  appVersion: '0.1.0',
+  appVersion: '0.1.0', 
   storageBucket: 'campus-connect',
 });
