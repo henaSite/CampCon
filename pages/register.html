@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register | Campus Connect</title>
+    <link rel="stylesheet" href="../css/styles.css" />
+  </head>
+  <body data-theme="light">
+    <div class="app-shell">
+      <header class="topbar">
+        <div class="container navbar">
+          <a class="brand" href="../index.html">
+            <span class="brand-mark"><img src="../assets/logo.svg" alt="" /></span>
+            <span>Campus Connect</span>
+          </a>
+          <div class="nav-actions">
+            <a class="button button-secondary" href="./login.html">Login</a>
+          </div>
+        </div>
+      </header>
+
+      <main class="auth-page">
+        <section class="auth-card">
+          <h1>Create your account</h1>
+          <p class="subtitle">Join the campus community and start reporting lost or found items.</p>
+
+          <form data-validate>
+            <div class="form-grid">
+              <div class="field">
+                <label for="fullName">Full name</label>
+                <input id="fullName" name="fullName" type="text" placeholder="Jane Doe" required />
+              </div>
+
+              <div class="form-row">
+                <div class="field">
+                  <label for="phone">Phone number</label>
+                  <input id="phone" name="phone" type="tel" placeholder="+1234567890" required />
+                </div>
+                <div class="field">
+                  <label for="email">Email address</label>
+                  <input id="email" name="email" type="email" placeholder="you@example.com" required />
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="field">
+                  <label for="password">Password</label>
+                  <input id="password" name="password" type="password" placeholder="Create a strong password" required />
+                </div>
+                <div class="field">
+                  <label for="confirmPassword">Confirm password</label>
+                  <input id="confirmPassword" name="confirmPassword" type="password" placeholder="Re-enter password" required />
+                </div>
+              </div>
+
+              <button class="button button-primary" type="submit">Create account</button>
+              <div class="status-message" aria-live="polite"></div>
+            </div>
+          </form>
+
+          <p class="form-help" style="margin-top: 18px; text-align: center;">
+            Already have an account? <a href="./login.html" style="color: var(--primary); font-weight: 700;">Sign in</a>
+          </p>
+        </section>
+      </main>
+    </div>
+
+    <script src="../js/config.js"></script>
+    <script src="../js/app.js"></script>
+  </body>
+</html>
