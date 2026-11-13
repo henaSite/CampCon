@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f6f8fc" />
+    <meta name="description" content="Campus Connect administration dashboard." />
+    <title>Admin dashboard | Campus Connect</title>
+    <link rel="icon" href="./assets/logo.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="./css/styles.css" />
+    <link rel="stylesheet" href="./css/phase1-polish.css" />
+  </head>
+  <body data-theme="light">
+    <div class="app-shell">
+      <header class="topbar">
+        <div class="container navbar">
+          <a class="brand" href="./index.html" aria-label="Campus Connect home">
+            <span class="brand-mark"><img src="./assets/logo.svg" alt="" /></span>
+            <span>Campus Connect</span>
+          </a>
+          <nav class="nav-links" aria-label="Main navigation">
+            <a href="./index.html">Home</a>
+            <a href="#stats">Admin overview</a>
+          </nav>
+          <div class="nav-actions">
+            <a class="button button-secondary" href="./index.html">Back to site</a>
+            <a class="button button-primary" href="./pages/login.html">Log in</a>
+          </div>
+        </div>
+      </header>
+
+      <main>
+        <section class="section">
+          <div class="container">
+            <div class="section-header">
+              <span class="eyebrow">Campus Connect · Administration</span>
+              <h1>Admin dashboard</h1>
+              <p>Review community activity, manage accounts, and respond to reports.</p>
+            </div>
+
+            <nav class="admin-tabs" aria-label="Admin sections">
+              <a class="button button-secondary" href="#stats">Stats Overview</a>
+              <a class="button button-secondary" href="#moderate-reports">Moderate Reports</a>
+              <a class="button button-secondary" href="#manage-users">Manage Users</a>
+              <a class="button button-secondary" href="#abuse-reports">Abuse Reports</a>
+            </nav>
+
+            <section id="stats" class="admin-section" aria-labelledby="stats-heading">
+              <div class="section-header">
+                <span class="eyebrow">Overview</span>
+                <h2 id="stats-heading">Stats Overview</h2>
+                <p>A snapshot of reports and community activity.</p>
+              </div>
+              <div class="stats-grid">
+                <article class="stat-card"><strong>—</strong><span>Open lost reports</span></article>
+                <article class="stat-card"><strong>—</strong><span>Open found reports</span></article>
+                <article class="stat-card"><strong>—</strong><span>Community members</span></article>
+                <article class="stat-card"><strong>—</strong><span>Reports awaiting review</span></article>
+              </div>
+            </section>
+
+            <section id="moderate-reports" class="admin-section" aria-labelledby="moderate-heading">
+              <div class="section-header">
+                <span class="eyebrow">Lost &amp; found</span>
+                <h2 id="moderate-heading">Moderate Reports</h2>
+                <p>Review item reports and keep the campus listings accurate and helpful.</p>
+              </div>
+              <div class="feature-card admin-panel">
+                <div class="item-head">
+                  <div>
+                    <h3>Item reports</h3>
+                    <p>Lost and found submissions will appear here for review.</p>
+                  </div>
+                  <span class="pill">Queue</span>
+                </div>
+                <div class="notice" role="status">No item reports are loaded. Connect the moderation workflow to populate this queue.</div>
+              </div>
+            </section>
+
+            <section id="manage-users" class="admin-section" aria-labelledby="users-heading">
+              <div class="section-header">
+                <span class="eyebrow">People</span>
+                <h2 id="users-heading">Manage Users</h2>
+                <p>Find community accounts and review their access and status.</p>
+              </div>
+              <div class="feature-card admin-panel">
+                <div class="item-head">
+                  <div>
+                    <h3>Community members</h3>
+                    <p>User management tools and account records will appear here.</p>
+                  </div>
+                </div>
+                <div class="notice" role="status">No user records are loaded. Connect the user management workflow to populate this list.</div>
+              </div>
+            </section>
+
+            <section id="abuse-reports" class="admin-section" aria-labelledby="abuse-heading">
+              <div class="section-header">
+                <span class="eyebrow">Safety</span>
+                <h2 id="abuse-heading">Abuse Reports</h2>
+                <p>Review reports submitted about content or behavior in the community.</p>
+              </div>
+              <div class="feature-card admin-panel">
+                <div class="item-head">
+                  <div>
+                    <h3>Reports from the community</h3>
+                    <p>Submitted abuse and content reports will appear here for follow-up.</p>
+                  </div>
+                  <span class="pill">Queue</span>
+                </div>
+                <div class="notice" role="status">No abuse reports are loaded. Connect the reports workflow to populate this queue.</div>
+              </div>
+            </section>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <div class="container">
+          <a class="brand" href="./index.html">
+            <span class="brand-mark"><img src="./assets/logo.svg" alt="" /></span>
+            <span>Campus Connect</span>
+          </a>
+          <span>Administration · Campus Connect</span>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
