@@ -126,7 +126,9 @@
         if (password !== confirmPassword) throw new Error('The passwords do not match.');
         const { error } = await auth.auth.signUp({
           email, password,
-          options: { data: { full_name: fullName, phone }, emailRedirectTo: `${baseUrl}pages/login.html` },
+          options: { 
+            data: { full_name: fullName, phone } 
+          }
         });
         if (error) throw error;
         form.reset();
