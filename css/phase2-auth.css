@@ -1,0 +1,9 @@
+/* Phase 2 auth component details */
+.session-label { display: inline-flex; align-items: center; color: var(--text-muted); font-size: .85rem; font-weight: 650; }
+.recovery-methods { display: grid; gap: 18px; }
+.recovery-method { padding: 18px; border: 1px solid var(--border); border-radius: 16px; background: var(--surface-alt); }
+.recovery-method h2 { margin: 0 0 7px; font-size: 1rem; }
+.recovery-method p { margin: 0 0 16px; color: var(--text-muted); font-size: .84rem; line-height: 1.55; }
+.recovery-method .status-message { margin-bottom: 0; }
+[hidden] { display: none !important; }
+@media (max-width: 600px) { .session-label { display: none; } .recovery-method { padding: 15px; } }

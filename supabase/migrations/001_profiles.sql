@@ -1,4 +1,4 @@
--- Phase 1: account profile bootstrap and private profile data.
+-- Phase 2: account profile bootstrap and private profile data.
 -- Run in the Supabase SQL Editor or apply with the Supabase CLI.
 
 create table if not exists public.profiles (
