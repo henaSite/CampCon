@@ -112,8 +112,7 @@
         if (!validPassword(password)) throw new Error('Use at least 10 characters with an uppercase letter, a lowercase letter, and a number.');
         if (password !== confirmPassword) throw new Error('The passwords do not match.');
         const { error } = await auth.auth.signUp({
-          email,
-          password,
+          email, password,
           options: { data: { full_name: fullName, phone }, emailRedirectTo: `${window.location.origin}/pages/login.html` },
         });
         if (error) throw error;
@@ -196,6 +195,22 @@
     navActions.append(account, logout);
   }
 
+  async function renderAdminNavigation(session) {
+    const nav = document.querySelector('.nav-links');
+    if (!nav) return;
+    nav.querySelector('[data-admin-nav-link]')?.remove();
+    if (!session?.user?.id || !configured()) return;
+    try {
+      const { data, error } = await getClient().from('profiles').select('role').eq('id', session.user.id).maybeSingle();
+      if (error || !['admin', 'super_admin'].includes(data?.role)) return;
+      const link = document.createElement('a');
+      link.href = './admin.html';
+      link.textContent = 'Admin';
+      link.dataset.adminNavLink = 'true';
+      nav.append(link);
+    } catch { /* Leave the Admin link hidden when role lookup is unavailable. */ }
+  }
+
   async function restoreProfileTheme(session) {
     if (!session || !configured()) return;
     try {
@@ -215,11 +230,13 @@
       auth.auth.getSession().then(({ data, error }) => {
         if (!error) {
           renderSessionControls(data.session);
+          renderAdminNavigation(data.session);
           restoreProfileTheme(data.session);
         }
       }).catch(() => {});
       const { data } = auth.auth.onAuthStateChange((_event, session) => {
         renderSessionControls(session);
+        window.setTimeout(() => renderAdminNavigation(session), 0);
         if (session) window.setTimeout(() => restoreProfileTheme(session), 0);
       });
       authSubscription = data.subscription;
