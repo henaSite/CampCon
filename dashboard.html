@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard — Campus Connect (CampCon)</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/phase1-polish.css" />
+  <style>
+    .dashboard-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .filter-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      flex: 1;
+      min-width: 260px;
+    }
+    .filter-group input,
+    .filter-group select {
+      padding: 0.65rem 0.9rem;
+      border-radius: 0.5rem;
+      border: 1px solid var(--border-color, #d1d5db);
+      background: var(--card-bg, #ffffff);
+      color: var(--text-primary, #111827);
+      font-size: 0.95rem;
+    }
+    .filter-group input {
+      flex: 1;
+      min-width: 180px;
+    }
+    .action-buttons {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+    .feed-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+      gap: 1.25rem;
+    }
+    .report-card {
+      background: var(--card-bg, #ffffff);
+      border: 1px solid var(--border-color, #e5e7eb);
+      border-radius: 0.75rem;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+    }
+    .badge {
+      display: inline-block;
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .badge-lost {
+      background: rgba(239, 68, 68, 0.14);
+      color: #dc2626;
+    }
+    .badge-found {
+      background: rgba(16, 185, 129, 0.14);
+      color: #059669;
+    }
+    .badge-recovered {
+      background: rgba(59, 130, 246, 0.14);
+      color: #2563eb;
+    }
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.55);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      z-index: 1000;
+    }
+    .modal-backdrop.active {
+      display: flex;
+    }
+    .modal-card {
+      background: var(--card-bg, #ffffff);
+      color: var(--text-primary, #111827);
+      width: 100%;
+      max-width: 500px;
+      max-height: 90vh;
+      overflow-y: auto;
+      border-radius: 0.85rem;
+      padding: 1.5rem;
+      border: 1px solid var(--border-color, #e5e7eb);
+    }
+    .form-field {
+      margin-bottom: 1rem;
+    }
+    .form-field label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 0.35rem;
+      font-size: 0.9rem;
+    }
+    .form-field input,
+    .form-field select,
+    .form-field textarea {
+      width: 100%;
+      padding: 0.65rem 0.85rem;
+      border-radius: 0.5rem;
+      border: 1px solid var(--border-color, #d1d5db);
+      background: var(--bg-primary, #f9fafb);
+      color: var(--text-primary, #111827);
+      font-family: inherit;
+      font-size: 0.95rem;
+    }
+    .comment-item {
+      padding: 0.75rem;
+      border-radius: 0.5rem;
+      background: var(--bg-primary, #f3f4f6);
+      margin-bottom: 0.6rem;
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav-container" style="display:flex;align-items:center;justify-content:space-between;padding:1rem 0;">
+      <a href="dashboard.html" class="brand-logo" style="font-weight:800;font-size:1.25rem;text-decoration:none;">
+        CampCon
+      </a>
+      <nav style="display:flex;gap:1rem;align-items:center;flex-wrap:wrap;">
+        <a href="dashboard.html" class="active">Feed</a>
+        <a href="inbox.html">Inbox</a>
+        <a href="profile.html">Profile</a>
+        <a href="settings.html">Settings</a>
+        <a href="about.html">About</a>
+        <a href="admin.html" id="navAdminLink" style="display:none;font-weight:700;">Admin</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container" style="padding: 1.5rem 1rem 3rem;">
+    <section style="margin-bottom: 1.5rem;">
+      <h1 style="margin-bottom: 0.25rem;">Campus Lost &amp; Found Feed</h1>
+      <p style="color: var(--text-secondary, #6b7280);">
+        Browse verified campus reports, comment with leads, or message the poster directly.
+      </p>
+    </section>
+
+    <section class="dashboard-controls">
+      <div class="filter-group">
+        <input type="search" id="searchInput" placeholder="Search item, location, or description..." />
+        <select id="typeFilter">
+          <option value="all">All Reports</option>
+          <option value="lost">Lost Items Only</option>
+          <option value="found">Found Items Only</option>
+        </select>
+        <select id="categoryFilter">
+          <option value="all">All Categories</option>
+        </select>
+      </div>
+
+      <div class="action-buttons">
+        <button type="button" class="btn btn-primary" id="openLostModalBtn">+ Report Lost</button>
+        <button type="button" class="btn btn-outline" id="openFoundModalBtn">+ Report Found</button>
+      </div>
+    </section>
+
+    <div id="statusBanner" style="display:none;padding:0.85rem 1rem;border-radius:0.5rem;margin-bottom:1rem;"></div>
+
+    <section id="reportsFeed" class="feed-grid">
+      <p style="color: var(--text-secondary, #6b7280);">Loading campus reports...</p>
+    </section>
+  </main>
+
+  <!-- Report Lost / Found Modal -->
+  <div id="reportModal" class="modal-backdrop" aria-hidden="true">
+    <div class="modal-card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;">
+        <h2 id="reportModalTitle" style="margin:0;">Report Item</h2>
+        <button type="button" id="closeReportModalBtn" style="background:none;border:none;font-size:1.4rem;cursor:pointer;">&times;</button>
+      </div>
+
+      <form id="reportForm">
+        <input type="hidden" id="reportTypeInput" value="lost" />
+
+        <div class="form-field">
+          <label for="itemNameInput">Item Name *</label>
+          <input type="text" id="itemNameInput" placeholder="e.g., Black Samsung Galaxy A54" required />
+        </div>
+
+        <div class="form-field">
+          <label for="itemCategoryInput">Category *</label>
+          <select id="itemCategoryInput" required></select>
+        </div>
+
+        <div class="form-field">
+          <label for="itemLocationInput">Campus Location *</label>
+          <input type="text" id="itemLocationInput" placeholder="e.g., Main Library 2nd Floor" required />
+        </div>
+
+        <div class="form-field">
+          <label for="itemDateInput" id="itemDateLabel">Date Lost *</label>
+          <input type="date" id="itemDateInput" required />
+        </div>
+
+        <div class="form-field">
+          <label for="itemDescriptionInput">Description &amp; Identifying Details *</label>
+          <textarea id="itemDescriptionInput" rows="3" placeholder="Color, stickers, case details, or serial marks..." required></textarea>
+        </div>
+
+        <div class="form-field">
+          <label for="itemImageUrlInput">Image URL (optional)</label>
+          <input type="url" id="itemImageUrlInput" placeholder="https://..." />
+        </div>
+
+        <div style="display:flex;justify-content:flex-end;gap:0.6rem;margin-top:1.25rem;">
+          <button type="button" class="btn btn-outline" id="cancelReportBtn">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="submitReportBtn">Submit Report</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Comments Modal -->
+  <div id="commentsModal" class="modal-backdrop" aria-hidden="true">
+    <div class="modal-card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;">
+        <h2 id="commentsModalTitle" style="margin:0;">Item Comments</h2>
+        <button type="button" id="closeCommentsModalBtn" style="background:none;border:none;font-size:1.4rem;cursor:pointer;">&times;</button>
+      </div>
+
+      <div id="commentsList" style="max-height:280px;overflow-y:auto;margin-bottom:1rem;">
+        <p style="color: var(--text-secondary, #6b7280);">Loading comments...</p>
+      </div>
+
+      <form id="commentForm" style="display:flex;gap:0.5rem;">
+        <input type="text" id="commentInput" placeholder="Write a helpful lead or question..." required style="flex:1;padding:0.6rem 0.8rem;border-radius:0.5rem;border:1px solid var(--border-color, #d1d5db);" />
+        <button type="submit" class="btn btn-primary">Post</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>
