@@ -1,170 +1,150 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#f6f8fc" />
-    <meta name="description" content="Manage your Campus Connect account preferences and privacy settings." />
-    <title>Settings | Campus Connect</title>
-    <link rel="icon" href="./assets/logo.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="./css/styles.css" />
-    <link rel="stylesheet" href="./css/phase1-polish.css" />
-  </head>
-  <body data-theme="light">
-    <div class="app-shell">
-      <header class="topbar">
-        <div class="container navbar">
-          <a class="brand" href="./index.html" aria-label="Campus Connect home">
-            <span class="brand-mark"><img src="./assets/logo.svg" alt="" /></span>
-            <span>Campus Connect</span>
-          </a>
-          <nav class="nav-links" aria-label="Main navigation">
-            <a href="./index.html">Home</a>
-            <a href="./index.html#how-it-works">How it works</a>
-            <a href="./index.html#about">About</a>
-          </nav>
-          <div class="nav-actions">
-            <a class="button button-secondary" href="./pages/login.html" data-auth-guest>Log in</a>
-            <a class="button button-primary" href="./pages/register.html" data-auth-guest>Create account</a>
-          </div>
-        </div>
-      </header>
-
-      <main>
-        <section class="section">
-          <div class="container">
-            <div class="section-header">
-              <span class="eyebrow">Your account</span>
-              <h1>Settings</h1>
-              <p>Personalize your Campus Connect experience and manage your account preferences.</p>
-            </div>
-
-            <div class="card-grid settings-grid">
-              <section class="feature-card" aria-labelledby="appearance-heading">
-                <span class="feature-icon" aria-hidden="true">Aa</span>
-                <h2 id="appearance-heading">Appearance</h2>
-                <p>Choose the look that feels right for you.</p>
-                <fieldset class="theme-panel">
-                  <legend class="form-help">Color theme</legend>
-                  <label class="theme-option" data-theme="light">
-                    <input type="radio" name="theme" value="light" checked />
-                    <span class="theme-swatch" aria-hidden="true"></span><span>Light</span>
-                  </label>
-                  <label class="theme-option" data-theme="dark">
-                    <input type="radio" name="theme" value="dark" />
-                    <span class="theme-swatch" aria-hidden="true"></span><span>Dark</span>
-                  </label>
-                  <label class="theme-option" data-theme="ocean">
-                    <input type="radio" name="theme" value="ocean" />
-                    <span class="theme-swatch" aria-hidden="true"></span><span>Ocean</span>
-                  </label>
-                  <label class="theme-option" data-theme="forest">
-                    <input type="radio" name="theme" value="forest" />
-                    <span class="theme-swatch" aria-hidden="true"></span><span>Forest</span>
-                  </label>
-                  <label class="theme-option" data-theme="sunset">
-                    <input type="radio" name="theme" value="sunset" />
-                    <span class="theme-swatch" aria-hidden="true"></span><span>Sunset</span>
-                  </label>
-                </fieldset>
-              </section>
-
-              <section class="feature-card" aria-labelledby="notifications-heading">
-                <span class="feature-icon" aria-hidden="true">✉</span>
-                <h2 id="notifications-heading">Notification Preferences</h2>
-                <p>Choose which updates you would like to receive.</p>
-                <div class="form-grid">
-                  <label class="settings-toggle"><input type="checkbox" name="email-notifications" checked /> Email notifications</label>
-                  <label class="settings-toggle"><input type="checkbox" name="message-notifications" checked /> New message alerts</label>
-                  <label class="settings-toggle"><input type="checkbox" name="match-notifications" checked /> Possible item matches</label>
-                  <label class="settings-toggle"><input type="checkbox" name="product-updates" /> Campus Connect updates</label>
-                </div>
-              </section>
-
-              <section class="feature-card" aria-labelledby="privacy-heading">
-                <span class="feature-icon" aria-hidden="true">◇</span>
-                <h2 id="privacy-heading">Privacy</h2>
-                <p>Manage how other members can reach you and see your account.</p>
-                <div class="form-grid">
-                  <label class="settings-toggle"><input type="checkbox" name="show-contact" /> Show my contact details on my reports</label>
-                  <label class="settings-toggle"><input type="checkbox" name="allow-messages" checked /> Allow members to message me about reports</label>
-                </div>
-                <p class="form-help">Your email address and account details are not public.</p>
-              </section>
-
-              <section class="feature-card" aria-labelledby="password-heading">
-                <span class="feature-icon" aria-hidden="true">⌑</span>
-                <h2 id="password-heading">Change Password</h2>
-                <p>Update your password to keep your account secure.</p>
-                <form class="form-grid" action="#" method="get">
-                  <div class="field">
-                    <label for="current-password">Current password</label>
-                    <input id="current-password" name="current-password" type="password" autocomplete="current-password" />
-                  </div>
-                  <div class="field">
-                    <label for="new-password">New password</label>
-                    <input id="new-password" name="new-password" type="password" autocomplete="new-password" />
-                  </div>
-                  <div class="field">
-                    <label for="confirm-password">Confirm new password</label>
-                    <input id="confirm-password" name="confirm-password" type="password" autocomplete="new-password" />
-                  </div>
-                  <button class="button button-primary" type="button">Update password</button>
-                </form>
-              </section>
-
-              <section class="feature-card" aria-labelledby="blocked-heading">
-                <span class="feature-icon" aria-hidden="true">⊘</span>
-                <h2 id="blocked-heading">Blocked Users</h2>
-                <p>People you block cannot contact you through Campus Connect.</p>
-                <div class="notice" role="status">Your blocked users list will appear here. You have no users to display yet.</div>
-              </section>
-
-              <section class="feature-card" aria-labelledby="language-heading">
-                <span class="feature-icon" aria-hidden="true">文</span>
-                <h2 id="language-heading">Language Preferences</h2>
-                <p>Select the language you prefer to use across the platform.</p>
-                <div class="field">
-                  <label for="language">Display language</label>
-                  <select id="language" name="language">
-                    <option value="en" selected>English</option>
-                    <option value="es">Español</option>
-                    <option value="fr">Français</option>
-                    <option value="sw">Kiswahili</option>
-                  </select>
-                </div>
-              </section>
-
-              <section class="feature-card" aria-labelledby="help-heading">
-                <span class="feature-icon" aria-hidden="true">?</span>
-                <h2 id="help-heading">Help &amp; Support</h2>
-                <p>Need a hand? Find answers or get in touch with the Campus Connect team.</p>
-                <div class="form-grid">
-                  <a class="button button-secondary" href="mailto:support@campusconnect.example">Contact support</a>
-                  <a class="button button-secondary" href="./index.html#how-it-works">How Campus Connect works</a>
-                </div>
-              </section>
-
-              <section class="feature-card settings-logout" aria-labelledby="logout-heading">
-                <span class="feature-icon" aria-hidden="true">↗</span>
-                <h2 id="logout-heading">Log out</h2>
-                <p>Sign out of your Campus Connect account on this device.</p>
-                <button class="button button-secondary" type="button" data-settings-logout>Log out</button>
-              </section>
-            </div>
-          </div>
-        </section>
-      </main>
-
-      <footer class="site-footer">
-        <div class="container">
-          <a class="brand" href="./index.html">
-            <span class="brand-mark"><img src="./assets/logo.svg" alt="" /></span>
-            <span>Campus Connect</span>
-          </a>
-          <span>Settings · Campus Connect</span>
-        </div>
-      </footer>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Settings — Campus Connect (CampCon)</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/phase1-polish.css" />
+  <style>
+    .settings-grid {
+      display: grid;
+      gap: 1.5rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .settings-card {
+      background: var(--card-bg, #ffffff);
+      border: 1px solid var(--border-color, #e5e7eb);
+      border-radius: 0.85rem;
+      padding: 1.5rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+    }
+    .theme-picker-group {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-top: 0.75rem;
+    }
+    .theme-option-btn {
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      border: 1px solid var(--border-color, #d1d5db);
+      background: var(--bg-primary, #f9fafb);
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+    .theme-option-btn.active {
+      border-color: var(--accent-primary, #2563eb);
+      background: var(--accent-primary, #2563eb);
+      color: #ffffff;
+    }
+    .form-field {
+      margin-bottom: 1rem;
+    }
+    .form-field label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 0.35rem;
+      font-size: 0.9rem;
+    }
+    .form-field input {
+      width: 100%;
+      padding: 0.65rem 0.85rem;
+      border-radius: 0.5rem;
+      border: 1px solid var(--border-color, #d1d5db);
+      background: var(--bg-primary, #f9fafb);
+      color: var(--text-primary, #111827);
+      font-family: inherit;
+      font-size: 0.95rem;
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav-container" style="display:flex;align-items:center;justify-content:space-between;padding:1rem 0;">
+      <a href="dashboard.html" class="brand-logo" style="font-weight:800;font-size:1.25rem;text-decoration:none;">
+        CampCon
+      </a>
+      <nav style="display:flex;gap:1rem;align-items:center;flex-wrap:wrap;">
+        <a href="dashboard.html">Feed</a>
+        <a href="inbox.html">Inbox</a>
+        <a href="profile.html">Profile</a>
+        <a href="settings.html" class="active">Settings</a>
+        <a href="about.html">About</a>
+        <a href="admin.html" id="navAdminLink" style="display:none;font-weight:700;">Admin</a>
+      </nav>
     </div>
-  </body>
+  </header>
+
+  <main class="container" style="padding: 1.5rem 1rem 3rem;">
+    <section style="margin-bottom: 1.5rem; text-align: center;">
+      <h1 style="margin-bottom: 0.25rem;">Account Settings</h1>
+      <p style="color: var(--text-secondary, #6b7280);">
+        Customize your appearance, security, and account preferences.
+      </p>
+    </section>
+
+    <div id="settingsBanner" style="display:none;padding:0.85rem 1rem;border-radius:0.5rem;margin-bottom:1rem;max-width:700px;margin-left:auto;margin-right:auto;"></div>
+
+    <div class="settings-grid">
+      <!-- Appearance & Themes -->
+      <section class="settings-card">
+        <h2 style="margin-top:0; font-size: 1.2rem;">Appearance &amp; Themes</h2>
+        <p style="font-size: 0.9rem; color: var(--text-secondary, #6b7280); margin-bottom: 0.75rem;">
+          Select your preferred theme. Changes apply instantly and save to your profile.
+        </p>
+        <div class="theme-picker-group">
+          <button type="button" class="theme-option-btn" data-theme-option="light">Light</button>
+          <button type="button" class="theme-option-btn" data-theme-option="dark">Dark</button>
+          <button type="button" class="theme-option-btn" data-theme-option="ocean">Ocean</button>
+          <button type="button" class="theme-option-btn" data-theme-option="forest">Forest</button>
+          <button type="button" class="theme-option-btn" data-theme-option="sunset">Sunset</button>
+        </div>
+      </section>
+
+      <!-- Change Password -->
+      <section class="settings-card">
+        <h2 style="margin-top:0; font-size: 1.2rem;">Change Password</h2>
+        <form id="passwordForm">
+          <div class="form-field">
+            <label for="newPasswordInput">New Password *</label>
+            <input type="password" id="newPasswordInput" placeholder="At least 6 characters" required minlength="6" />
+          </div>
+          <div class="form-field">
+            <label for="confirmPasswordInput">Confirm New Password *</label>
+            <input type="password" id="confirmPasswordInput" placeholder="Re-enter new password" required minlength="6" />
+          </div>
+          <button type="submit" class="btn btn-primary" id="updatePasswordBtn">Update Password</button>
+        </form>
+      </section>
+
+      <!-- Blocked Users -->
+      <section class="settings-card">
+        <h2 style="margin-top:0; font-size: 1.2rem;">Blocked Users</h2>
+        <p style="font-size: 0.9rem; color: var(--text-secondary, #6b7280); margin-bottom: 0.75rem;">
+          Users you have blocked from messaging you.
+        </p>
+        <div id="blockedUsersList">
+          <p style="font-size: 0.85rem; color: var(--text-secondary, #6b7280);">No blocked users.</p>
+        </div>
+      </section>
+
+      <!-- Session & Logout -->
+      <section class="settings-card" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+        <div>
+          <h2 style="margin-top:0; font-size: 1.2rem; margin-bottom: 0.2rem;">Sign Out</h2>
+          <p style="margin: 0; font-size: 0.85rem; color: var(--text-secondary, #6b7280);">End your secure session on this device.</p>
+        </div>
+        <button type="button" class="btn btn-outline" id="logoutBtn" style="color:#dc2626; border-color:#dc2626;">Log Out</button>
+      </section>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/settings.js"></script>
+</body>
 </html>
