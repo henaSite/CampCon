@@ -3,31 +3,28 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Campus Connect</title>
+    <meta name="theme-color" content="#f6f8fc" />
     <meta name="description" content="Campus Connect helps school communities report lost and found items and reconnect safely." />
+    <title>Campus Connect | Find what matters</title>
+    <link rel="icon" href="./assets/logo.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="./css/styles.css" />
+    <link rel="stylesheet" href="./css/phase1-polish.css" />
   </head>
   <body data-theme="light">
     <div class="app-shell">
       <header class="topbar">
         <div class="container navbar">
           <a class="brand" href="./index.html" aria-label="Campus Connect home">
-            <span class="brand-mark">
-              <img src="./assets/logo.svg" alt="Campus Connect logo" />
-            </span>
+            <span class="brand-mark"><img src="./assets/logo.svg" alt="" /></span>
             <span>Campus Connect</span>
           </a>
-
           <nav class="nav-links" aria-label="Main navigation">
-            <a href="#features">Features</a>
             <a href="#how-it-works">How it works</a>
-            <a href="#themes">Themes</a>
             <a href="#about">About</a>
           </nav>
-
           <div class="nav-actions">
-            <a class="button button-secondary" href="./pages/login.html">Login</a>
-            <a class="button button-primary" href="./pages/register.html">Get Started</a>
+            <a class="button button-secondary" href="./pages/login.html">Log in</a>
+            <a class="button button-primary" href="./pages/register.html">Create account</a>
           </div>
         </div>
       </header>
@@ -35,168 +32,53 @@
       <main>
         <section class="hero">
           <div class="container hero-grid">
-            <div>
-              <span class="kicker">Helping the campus community reconnect</span>
-              <h1>Lost items. Found items. One campus community.</h1>
-              <p>
-                Campus Connect makes it easy for students and staff to report missing belongings,
-                share sightings, and quickly reunite lost items with their owners through a secure and responsive platform.
-              </p>
-
+            <div class="hero-copy">
+              <span class="kicker"><span class="status-dot" aria-hidden="true"></span> A community that helps things find their way home</span>
+              <h1>Lost something? <span>Let’s bring it back.</span></h1>
+              <p>Campus Connect gives your school community one simple, trusted place to report lost belongings, share found items, and get in touch securely.</p>
               <div class="hero-actions">
-                <a class="button button-primary" href="./pages/register.html">Create account</a>
-                <a class="button button-secondary" href="./pages/login.html">Sign in</a>
+                <a class="button button-primary" href="./pages/register.html">Join Campus Connect <span aria-hidden="true">→</span></a>
+                <a class="button button-secondary" href="#how-it-works">See how it works</a>
               </div>
-
-              <div class="hero-meta">
-                <span>Trusted by modern campuses</span>
-                <span>Realtime messaging</span>
-                <span>Admin moderation</span>
+              <div class="hero-meta" aria-label="Platform highlights">
+                <span>Community-powered</span><span>Private messaging</span><span>Moderated reports</span>
               </div>
             </div>
-
-            <div class="hero-visual" aria-label="App preview panel">
-              <div class="preview-card">
-                <div class="preview-header">
-                  <div class="brand" style="font-size: 0.95rem;">
-                    <span class="brand-mark"><img src="./assets/logo.svg" alt="" /></span>
-                    <span>Campus Connect</span>
-                  </div>
-                  <span class="pill found">Found</span>
+            <div class="hero-visual" aria-label="How items make their way home">
+              <div class="journey-card">
+                <div class="journey-topline"><span class="journey-icon" aria-hidden="true">↗</span><span class="journey-label">A little help goes a long way</span></div>
+                <h2>One report can make someone’s day.</h2>
+                <div class="journey-steps">
+                  <div class="journey-step"><span class="step-number">01</span><span><strong>Share the details</strong><small>Tell your community what went missing or what you found.</small></span></div>
+                  <div class="journey-connector" aria-hidden="true"></div>
+                  <div class="journey-step"><span class="step-number">02</span><span><strong>Connect securely</strong><small>Talk privately to coordinate a safe handover.</small></span></div>
+                  <div class="journey-connector" aria-hidden="true"></div>
+                  <div class="journey-step"><span class="step-number">03</span><span><strong>Bring it home</strong><small>Mark it recovered and celebrate a campus win.</small></span></div>
                 </div>
-
-                <div class="preview-list">
-                  <div class="item-card">
-                    <div class="item-head">
-                      <strong>Blue Water Bottle</strong>
-                      <span class="pill found">Found</span>
-                    </div>
-                    <div class="form-help">Found near the library entrance • 2h ago</div>
-                  </div>
-
-                  <div class="item-card">
-                    <div class="item-head">
-                      <strong>Black Wallet</strong>
-                      <span class="pill lost">Lost</span>
-                    </div>
-                    <div class="form-help">Last seen in Science Hall • Today</div>
-                  </div>
-
-                  <div class="item-card">
-                    <div class="item-head">
-                      <strong>Silver Keychain</strong>
-                      <span class="pill found">Found</span>
-                    </div>
-                    <div class="form-help">Found by the student union • Yesterday</div>
-                  </div>
-                </div>
+                <div class="journey-footer"><span class="mini-avatars" aria-hidden="true"><i> C </i><i> C </i><i> C </i></span><span>Made for your campus community</span></div>
               </div>
-            </div>
-          </div>
-        </section>
-
-        <section class="section" id="features">
-          <div class="container">
-            <div class="section-header">
-              <h2>Built for everyday campus recovery</h2>
-              <p>
-                From lost phones and laptops to identification cards and books, the platform is designed to help users report, search and resolve item ownership quickly and safely.
-              </p>
-            </div>
-
-            <div class="card-grid">
-              <article class="feature-card">
-                <div class="feature-icon">01</div>
-                <h3>Report quickly</h3>
-                <p>Post a lost or found item with essential details, photos and location to help others spot it faster.</p>
-              </article>
-
-              <article class="feature-card">
-                <div class="feature-icon">02</div>
-                <h3>Comment and message</h3>
-                <p>Users can discuss reports, ask clarifying questions and communicate privately through the inbox system.</p>
-              </article>
-
-              <article class="feature-card">
-                <div class="feature-icon">03</div>
-                <h3>Moderate safely</h3>
-                <p>Admins review reports, remove suspicious posts and manage content safety with a secure role-based system.</p>
-              </article>
+              <span class="decor decor-one" aria-hidden="true">✳</span><span class="decor decor-two" aria-hidden="true">✦</span>
             </div>
           </div>
         </section>
 
         <section class="section" id="how-it-works">
           <div class="container">
-            <div class="section-header">
-              <h2>How Campus Connect works</h2>
-            </div>
-
-            <div class="stats-grid">
-              <article class="stat-card">
-                <strong>1</strong>
-                <span>Submit a report</span>
-              </article>
-              <article class="stat-card">
-                <strong>2</strong>
-                <span>Browse listings</span>
-              </article>
-              <article class="stat-card">
-                <strong>3</strong>
-                <span>Message owner</span>
-              </article>
-              <article class="stat-card">
-                <strong>4</strong>
-                <span>Recover item</span>
-              </article>
+            <div class="section-header"><span class="eyebrow">Simple by design</span><h2>From lost to found, together.</h2><p>Clear reports and direct communication help your campus return belongings to the people who miss them.</p></div>
+            <div class="card-grid">
+              <article class="feature-card"><div class="feature-icon">01</div><h3>Report an item</h3><p>Share what was lost or found, where it happened, and the details that can help identify it.</p></article>
+              <article class="feature-card"><div class="feature-icon">02</div><h3>Find a connection</h3><p>Search community reports, leave a comment, or message a report owner privately.</p></article>
+              <article class="feature-card"><div class="feature-icon">03</div><h3>Make a safe return</h3><p>Coordinate a handover and update the report when an item is back with its owner.</p></article>
             </div>
           </div>
         </section>
 
-        <section class="section" id="themes">
-          <div class="container">
-            <div class="section-header">
-              <h2>Choose your workspace theme</h2>
-              <p>Campus Connect includes five carefully matched themes that update the entire experience across the application.</p>
-            </div>
-
-            <div class="theme-panel" aria-label="Theme selector">
-              <button class="theme-option" data-theme-option="light" type="button">
-                <span class="theme-swatch"></span>
-                <span>Light</span>
-              </button>
-              <button class="theme-option" data-theme-option="dark" type="button">
-                <span class="theme-swatch"></span>
-                <span>Dark</span>
-              </button>
-              <button class="theme-option" data-theme-option="ocean" type="button">
-                <span class="theme-swatch"></span>
-                <span>Ocean Blue</span>
-              </button>
-              <button class="theme-option" data-theme-option="forest" type="button">
-                <span class="theme-swatch"></span>
-                <span>Forest Green</span>
-              </button>
-              <button class="theme-option" data-theme-option="sunset" type="button">
-                <span class="theme-swatch"></span>
-                <span>Sunset Orange</span>
-              </button>
-            </div>
-          </div>
-        </section>
-
-        <section class="section" id="about">
-          <div class="container">
-            <div class="notice">
-              <strong>About Campus Connect:</strong>
-              Campus Connect is a digital platform designed to connect members of a school community through a simple and accessible Lost and Found system. It helps users report missing belongings, share information about discovered items and communicate with one another to help return lost properties to their rightful owners.
-            </div>
-          </div>
+        <section class="section about-section" id="about">
+          <div class="container about-panel"><div class="about-mark"><img src="./assets/logo.svg" alt="Campus Connect logo" /></div><div><span class="eyebrow">About Campus Connect</span><h2>Small moments of connection matter.</h2><p>Campus Connect is a digital platform designed to connect members of a school community through a simple and accessible Lost and Found system. It helps users report missing belongings, share information about discovered items and communicate with one another to help return lost properties to their rightful owners.</p></div></div>
         </section>
       </main>
+      <footer class="site-footer"><div class="container"><a class="brand" href="./index.html"><span class="brand-mark"><img src="./assets/logo.svg" alt="" /></span><span>Campus Connect</span></a><span>Helping campus belongings find their way home.</span></div></footer>
     </div>
-
-    <script src="./js/config.js"></script>
     <script src="./js/app.js"></script>
   </body>
 </html>
