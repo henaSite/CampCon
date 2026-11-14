@@ -10,67 +10,49 @@
 <body>
   <header class="site-header">
     <div class="container nav-container" style="display:flex;align-items:center;justify-content:space-between;padding:1rem 0;">
-      <a href="dashboard.html" class="brand-logo" style="font-weight:800;font-size:1.25rem;text-decoration:none;">
-        CampCon
-      </a>
+      <a href="dashboard.html" class="brand-logo" style="font-weight:800;font-size:1.25rem;text-decoration:none;">CampCon</a>
       <nav style="display:flex;gap:1rem;align-items:center;flex-wrap:wrap;">
-        <a href="dashboard.html">Feed</a>
-        <a href="inbox.html">Inbox</a>
-        <a href="profile.html">Profile</a>
-        <a href="settings.html">Settings</a>
-        <a href="about.html" class="active">About</a>
+        <a href="dashboard.html">Feed</a><a href="inbox.html">Inbox</a><a href="profile.html">Profile</a><a href="settings.html">Settings</a><a href="about.html" class="active">About</a>
         <a href="admin.html" id="navAdminLink" style="display:none;font-weight:700;">Admin</a>
       </nav>
     </div>
   </header>
-
-  <main class="container" style="padding: 1.5rem 1rem 3rem; max-width: 800px;">
-    <section style="background: var(--card-bg, #ffffff); border: 1px solid var(--border-color, #e5e7eb); border-radius: 0.85rem; padding: 2rem; box-shadow: 0 2px 6px rgba(0,0,0,0.04);">
-      <h1 style="margin-top:0; font-size: 1.75rem;">About Campus Connect</h1>
-      <p style="color: var(--text-secondary, #6b7280); font-size: 1.05rem; line-height: 1.6;">
-        <strong>Campus Connect (CampCon)</strong> is a professional, secure full-stack platform designed to help students and faculty quickly report, discover, and recover lost items across campus.
-      </p>
-
-      <hr style="border:0; border-top:1px solid var(--border-color, #e5e7eb); margin: 1.5rem 0;" />
-
+  <main class="container" style="padding:1.5rem 1rem 3rem;max-width:800px;">
+    <section style="background:var(--card-bg,#fff);border:1px solid var(--border-color,#e5e7eb);border-radius:.85rem;padding:2rem;box-shadow:0 2px 6px rgba(0,0,0,.04);">
+      <h1 style="margin-top:0;font-size:1.75rem;">About Campus Connect</h1>
+      <p style="color:var(--text-secondary,#6b7280);font-size:1.05rem;line-height:1.6;"><strong>Campus Connect (CampCon)</strong> is a professional, secure full-stack platform designed to help students and faculty quickly report, discover, and recover lost items across campus.</p>
+      <hr style="border:0;border-top:1px solid var(--border-color,#e5e7eb);margin:1.5rem 0;" />
       <h2>How It Works</h2>
-      <ul style="line-height: 1.7; color: var(--text-secondary, #4b5563); padding-left: 1.2rem;">
+      <ul style="line-height:1.7;color:var(--text-secondary,#4b5563);padding-left:1.2rem;">
         <li><strong>Report:</strong> Submit a detailed report for any item you lost or found on university grounds.</li>
         <li><strong>Moderate:</strong> Campus moderators review submissions to ensure safety and prevent spam.</li>
         <li><strong>Discover:</strong> Browse the live community feed filtered by category, search keywords, or item type.</li>
         <li><strong>Connect:</strong> Leave public lead comments or start secure private conversations with item owners.</li>
       </ul>
-
-      <h2 style="margin-top: 2rem;">Privacy &amp; Safety</h2>
-      <p style="color: var(--text-secondary, #6b7280); line-height: 1.6;">
-        CampCon protects your personal contact details. Other users only see your name and profile when you post items or send messages. Role-based moderation (Super Admin, Admin, Moderator) ensures campus-wide trust and accountability.
-      </p>
-
-      <h2 style="margin-top: 2rem;">System Information</h2>
-      <p style="color: var(--text-secondary, #6b7280); line-height: 1.6;">
-        <strong>Version:</strong> 1.0.0 (Production Build)<br />
-        <strong>Support Contact:</strong> <a href="mailto:support@campusconnect.example" style="color: var(--accent-primary, #2563eb);">support@campusconnect.example</a>
-      </p>
+      <h2 style="margin-top:2rem;">Privacy &amp; Safety</h2>
+      <p style="color:var(--text-secondary,#6b7280);line-height:1.6;">CampCon protects your personal contact details. Other users only see your name and profile when you post items or send messages. Role-based moderation (Super Admin, Admin, Moderator) ensures campus-wide trust and accountability.</p>
+      <h2 style="margin-top:2rem;">System Information</h2>
+      <p style="color:var(--text-secondary,#6b7280);line-height:1.6;"><strong>Version:</strong> 1.0.0 (Production Build)<br /><strong>Support Contact:</strong> <a href="mailto:support@campusconnect.example" style="color:var(--accent-primary,#2563eb);">support@campusconnect.example</a></p>
     </section>
   </main>
-
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="js/config.js"></script>
   <script src="js/app.js"></script>
+  <script src="js/auth.js"></script>
   <script>
-    (async function() {
-      if (!window.supabase || !window.SUPABASE_URL || !window.SUPABASE_ANON_KEY) return;
-      const client = window.supabase.createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
-      const { data: { session } } = await client.auth.getSession();
-      if (session?.user) {
+    (async () => {
+      try {
+        const client = window.CampusConnectAuth.getClient();
+        const { data: { session }, error } = await client.auth.getSession();
+        if (error || !session?.user) return;
         const { data: profile } = await client.from('profiles').select('role, theme').eq('id', session.user.id).maybeSingle();
-        if (profile?.theme) {
-          document.documentElement.setAttribute('data-theme', profile.theme);
-        }
+        if (profile?.theme) document.body.dataset.theme = profile.theme;
         if (profile && ['super_admin', 'admin', 'moderator'].includes(profile.role)) {
           const adminLink = document.getElementById('navAdminLink');
           if (adminLink) adminLink.style.display = 'inline-block';
         }
+      } catch (error) {
+        console.error('Unable to load Campus Connect profile details.', error);
       }
     })();
   </script>
