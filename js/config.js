@@ -50,12 +50,7 @@
     }
     if (!client) {
       client = window.supabase.createClient(config.supabaseUrl, config.supabaseAnonKey, {
-        auth: {
-          persistSession: true,
-          autoRefreshToken: true,
-          detectSessionInUrl: true,
-          storage: storageAdapter(),
-        },
+        auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true, storage: storageAdapter() },
       });
     }
     return client;
@@ -68,6 +63,12 @@
     appUrl(path = '') { return new URL(String(path).replace(/^\//, ''), appBaseUrl).href; },
   });
 
-  // Compatibility for existing feature scripts; this is the same singleton returned by getClient().
-  try { window.supabaseClient = getClient(); } catch { /* Pages show actionable errors when they need Supabase. */ }
+  // These legacy feature pages have no explicit auth.js tag yet. Inject the shared auth
+  // integration synchronously after this config script and before their app/feature scripts.
+  const authBootstrapPages = new Set(['dashboard.html', 'profile.html', 'inbox.html', 'settings.html']);
+  const pageName = window.location.pathname.split('/').pop();
+  if (authBootstrapPages.has(pageName) && configScript && document.write) {
+    const authScriptUrl = new URL('js/auth.js', appBaseUrl).href;
+    document.write(`<script src="${authScriptUrl}"><\/script>`);
+  }
 })();
