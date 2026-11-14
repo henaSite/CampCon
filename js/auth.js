@@ -1,6 +1,7 @@
 (() => {
   const config = window.CAMPUS_CONNECT_CONFIG || {};
   const validThemes = ['light', 'dark', 'ocean', 'forest', 'sunset'];
+  const SITE_BASE = 'https://henasite.github.io/CampCon';
   let client;
   let rememberSession = true;
   let authSubscription;
@@ -8,17 +9,6 @@
   function configured() {
     return Boolean(config.supabaseUrl && config.supabaseAnonKey &&
       !config.supabaseUrl.includes('YOUR_SUPABASE') && !config.supabaseAnonKey.includes('YOUR_SUPABASE'));
-  }
-
-  function getBaseUrl() {
-    const loc = window.location;
-    let basePath = loc.origin;
-    if (loc.pathname.includes('/pages/')) {
-      basePath += loc.pathname.substring(0, loc.pathname.indexOf('/pages/'));
-    } else {
-      basePath += loc.pathname.substring(0, loc.pathname.lastIndexOf('/') + 1);
-    }
-    return basePath.endsWith('/') ? basePath : basePath + '/';
   }
 
   function createStorageAdapter() {
@@ -114,7 +104,6 @@
 
     try {
       const auth = getClient();
-      const baseUrl = getBaseUrl();
 
       if (action === 'register') {
         const fullName = String(data.get('fullName') || '').trim();
@@ -126,21 +115,22 @@
         if (password !== confirmPassword) throw new Error('The passwords do not match.');
         const { error } = await auth.auth.signUp({
           email, password,
-          options: { 
-            data: { full_name: fullName, phone } 
-          }
+          options: {
+            data: { full_name: fullName, phone },
+            emailRedirectTo: `${SITE_BASE}/pages/login.html`
+          },
         });
         if (error) throw error;
         form.reset();
-        showStatus(form, 'Your account request was received. Check your email for a verification link before logging in. If the address is already registered, use the existing account’s recovery flow.', 'success');
+        showStatus(form, 'Your account request was received. Check your email for a verification link before logging in.', 'success');
       } else if (action === 'login') {
         const { error } = await auth.auth.signInWithPassword({ email, password });
         if (error) throw error;
         showStatus(form, 'Login successful. Redirecting…', 'success');
-        window.setTimeout(() => { window.location.assign(`${baseUrl}index.html`); }, 500);
+        window.setTimeout(() => { window.location.assign(`${SITE_BASE}/dashboard.html`); }, 500);
       } else if (action === 'recover') {
         if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) throw new Error('Enter a valid email address.');
-        const { error } = await auth.auth.resetPasswordForEmail(email, { redirectTo: `${baseUrl}pages/reset-password.html` });
+        const { error } = await auth.auth.resetPasswordForEmail(email, { redirectTo: `${SITE_BASE}/pages/reset-password.html` });
         if (error) throw error;
         showStatus(form, 'If an account exists for that address, a secure password reset link will arrive shortly. Check your inbox and spam folder.', 'success');
       } else if (action === 'phone-otp-request') {
@@ -201,7 +191,7 @@
       try {
         const { error } = await getClient().auth.signOut();
         if (error) throw error;
-        window.location.assign(`${getBaseUrl()}index.html`);
+        window.location.assign(`${SITE_BASE}/index.html`);
       } catch (error) {
         logout.disabled = false;
         window.alert(friendlyError(error));
@@ -219,7 +209,7 @@
       const { data, error } = await getClient().from('profiles').select('role').eq('id', session.user.id).maybeSingle();
       if (error || !['admin', 'super_admin'].includes(data?.role)) return;
       const link = document.createElement('a');
-      link.href = `${getBaseUrl()}admin.html`;
+      link.href = `${SITE_BASE}/admin.html`;
       link.textContent = 'Admin';
       link.dataset.adminNavLink = 'true';
       nav.append(link);
